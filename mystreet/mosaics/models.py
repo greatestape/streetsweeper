@@ -29,7 +29,8 @@ class Patch(models.Model):
     source_image = models.ForeignKey('Photo', verbose_name=_lazy(u'source image'))
     colour_correction = models.ForeignKey('ColourCorrection', verbose_name=_lazy(u'colour correction'))
     rotation = models.FloatField(_lazy('rotation'), help_text=_lazy('measured in radians, positive values rotate counte-clockwise'))
-    cropping = models.
+    mask = models.CommaSeparatedIntegerField(_('mask'), blank=True, max_length=512)
+    modified_image = models.ImageField(_('modified image'), upload_to=get_modified_file_path, null=True, blank=True, height_field=, width_field=)
 
     class Admin:
         list_display = ('',)
@@ -37,3 +38,10 @@ class Patch(models.Model):
 
     def __str__(self):
         return "Patch"
+
+
+def get_modified_file_path(instance, filename):
+    return 'files/mosaics/%s/patches/%s/%s' % (
+        getattr(getattr(instance,'mosaic',None),'slug','unknown'),
+        getattr(instance,'pk','unknown'),
+        filename)
