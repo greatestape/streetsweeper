@@ -1,0 +1,6 @@
+- Add photo upload support
+    - Add basic upload support
+    - Add ownership fields
+    - Add camera info fields
+- Add photo masking support
+- Implement mosaics
