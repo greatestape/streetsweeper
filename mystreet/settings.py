@@ -1,14 +1,51 @@
-# Django settings for mystreet project.
+import os.path
 
-# Import common settings from shared_settings, which lives in svn repository
-from shared_settings import *
+ADMINS = (
+    ('Sam Bull', 'sbull@trapeze.com'),
+)
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+MANAGERS = ADMINS
 
-DATABASE_ENGINE = ''           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = ''             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+TIME_ZONE = 'America/Toronto'
+
+LANGUAGE_CODE = 'en-ca'
+
+SITE_ID = 1
+
+USE_I18N = True
+
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
+MEDIA_ROOT = os.path.join(PROJECT_PATH, '../media/')
+
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_PATH, 'templates/'),
+)
+
+SECRET_KEY = 'v79bip426r8wc37$+)0*nkauv5q76x&u$^b+qme#*g1bhb+ige'
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.load_template_source',
+    'django.template.loaders.app_directories.load_template_source',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+)
+
+ROOT_URLCONF = 'mystreet.urls'
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+)
+
+try:
+    from settings_local import *
+except ImportError:
+    pass
