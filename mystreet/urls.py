@@ -1,9 +1,8 @@
 from django.conf.urls.defaults import *
+from django.contrib import admin
+
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^mystreet/', include('mystreet.foo.urls')),
-
-    # Uncomment this for admin:
-#     (r'^admin/', include('django.contrib.admin.urls')),
+    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    (r'^admin/(.*)', admin.site.root),
 )

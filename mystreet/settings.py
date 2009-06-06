@@ -39,6 +39,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'mystreet.urls'
 
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
