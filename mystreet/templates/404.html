@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super }} - Couln't find "{{request_path }}"{% endblock %}
+
+{% block content %}
+<h1>Couldn't find "{{ request_path }}"</h1>
+<p>Somebody steered you wrong. I hope it wasn't me.</p>
+{% endblock %}
