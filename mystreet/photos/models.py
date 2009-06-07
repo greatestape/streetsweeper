@@ -4,9 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 
 class Photo(models.Model):
     """An uploaded photo"""
-    height = models.IntegerField(_('height'))
-    width = models.IntegerField(_('width'))
-    photo = models.ImageField(upload_to="managed/photos", height_field=height, width_field=width)
+    photo = models.ImageField(upload_to="managed/photos", height_field='height', width_field='width')
+    width = models.IntegerField(_('width'), null=True, blank=True)
+    height = models.IntegerField(_('height'), null=True, blank=True)
 
     class Meta:
         verbose_name = _("Photo")
