@@ -12,6 +12,9 @@ def upload(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('photo_upload_status'))
+    else:
+        form = UploadForm()
+    return simple.direct_to_template(request, 'photos/upload.html', {'form': form})
 
 
 def success(request):

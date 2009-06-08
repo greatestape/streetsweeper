@@ -29,6 +29,10 @@ class PhotoUploadTestCase(TestCase):
         self.assertEqual(new_photo.width, actual_width)
         self.assertEqual(new_photo.height, actual_height)
 
+    def testPhotoUploadGet(self):
+        response = self.client.get(self.upload_url)
+        self.assertEqual(response.status_code, 200)
+
     def tearDown(self):
         for photo in Photo.objects.all():
             photo.delete()
