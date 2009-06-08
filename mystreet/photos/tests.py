@@ -30,7 +30,8 @@ class PhotoUploadTestCase(TestCase):
         self.assertEqual(new_photo.height, actual_height)
 
     def tearDown(self):
-        Photo.objects.all()[0].delete()
+        for photo in Photo.objects.all():
+            photo.delete()
 
 
 def _get_test_photo_file():
