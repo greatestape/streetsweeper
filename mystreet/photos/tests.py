@@ -16,9 +16,8 @@ class PhotoUploadTestCase(TestCase):
         self.upload_url = reverse('photo_upload')
 
     def testPhotoUploadPost(self):
-        test_file = _get_test_photo_file()
-        test_name = 'Cat Photo'
-        response = self.client.post(self.upload_url, {'name': test_name, 'photo': open(test_file)})
+        test_file = _get_media_file_path(TEST_PHOTO)
+        response = self.client.post(self.upload_url, {'photo': open(test_file)})
         self.assertRedirects(response, reverse('photo_upload_status'))
         self.assertEqual(Photo.objects.count(), 1)
         new_photo = Photo.objects.all()[0]
@@ -38,5 +37,5 @@ class PhotoUploadTestCase(TestCase):
             photo.delete()
 
 
-def _get_test_photo_file():
-    return os.path.join(settings.MEDIA_ROOT, TEST_PHOTO)
+def _get_media_file_path(path):
+    return os.path.join(settings.MEDIA_ROOT, path)
