@@ -4,5 +4,5 @@ from django.contrib import admin
 
 urlpatterns = patterns('photos.views',
     (r'^upload/$', 'upload', {}, 'photo_upload'),
-    (r'^upload/success/$', 'success', {}, 'photo_upload_status'),
+    (r'^detail/(?P<id>\d+)/$', 'detail', {}, 'photo_detail'),
 )

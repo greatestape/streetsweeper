@@ -14,3 +14,7 @@ class Photo(models.Model):
 
     def __unicode__(self):
         return self.photo.name
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('photo_detail', (), {'id': self.id})
