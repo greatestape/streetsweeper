@@ -1,0 +1,15 @@
+User Stories
+============
+
+Who: A photographer
+What: Uploads a photo
+Why: Wants to improve the mosaic
+
+Who: A logged in visitor
+What: Votes a mosaic tile up
+Why: They think the tile fits well in the mosaic
+
+Who: A logged in visitor
+What: Votes a mosaic tile down
+Why: They don't think the tile fits well in the mosaic
+
