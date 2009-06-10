@@ -5,6 +5,13 @@ Who: A photographer
 What: Uploads a photo
 Why: Wants to improve the mosaic
 
+1. Log in
+2. Go to upload page
+3. Select photo to upload
+4. Submit form
+5. Review photo in detail view
+
+
 Who: A logged in visitor
 What: Votes a mosaic tile up
 Why: They think the tile fits well in the mosaic
