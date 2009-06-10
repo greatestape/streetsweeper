@@ -32,6 +32,10 @@ class PhotoUploadTestCase(TestCase):
         response = self.client.get(self.upload_url)
         self.assertEqual(response.status_code, 200)
 
+    def testNoFileError(self):
+        response = self.client.post(self.upload_url)
+        self.assertFormError(response, 'form', 'photo', 'Please provide a photo for upload.')
+
     def tearDown(self):
         for photo in Photo.objects.all():
             photo.delete()
