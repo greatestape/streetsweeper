@@ -2,14 +2,19 @@ User Stories
 ============
 
 Who: A photographer
-What: Uploads a photo
+What: Adds a photo to the mosaic
 Why: Wants to improve the mosaic
 
+1. visit website
 1. Log in
-2. Go to upload page
-3. Select photo to upload
-4. Submit form
-5. Review photo in detail view
+1. Go to upload page
+1. Select photo to upload
+1. Select mosaic location to upload to
+1. Submit form
+1. Identify the useful portion of the photo (creating a mosaic tile)
+1. Place tile on mosaic
+1. Submit the positioned tile
+1. Thank you/submissions status page
 
 
 Who: A logged in visitor
