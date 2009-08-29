@@ -1,5 +1,5 @@
 - Add photo upload support
-    - Add photo upload view (GET and POST)
+    ✓ Add photo upload view (GET and POST)
     - Add photo status view
     - Add ownership fields
     - Add camera info fields
