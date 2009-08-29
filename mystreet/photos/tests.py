@@ -32,6 +32,7 @@ class PhotoUploadTestCase(TestCase):
     def testPhotoUploadGet(self):
         response = self.client.get(self.upload_url)
         self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'photos/upload.html')
 
     def testNoFileError(self):
         response = self.client.post(self.upload_url)
