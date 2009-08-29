@@ -31,6 +31,7 @@ class PhotoUploadTestCase(TestCase):
         self.assertEqual(actual_file.read(), new_photo.photo.read())
         self.assertEqual(new_photo.width, actual_width)
         self.assertEqual(new_photo.height, actual_height)
+        self.assertEqual(new_photo.owner, self.user)
 
     def testPhotoUploadGet(self):
         self.client.login(username='testuser', password='testpw')
@@ -54,7 +55,8 @@ class PhotoUploadTestCase(TestCase):
 
 class PhotoStatusTestCase(TestCase):
     def setUp(self):
-        self.photo = Photo.objects.create()
+        self.user = User.objects.create_user('testuser', 'testuser@test.com', 'testpw')
+        self.photo = Photo.objects.create(owner=self.user)
         self.photo.photo = _get_media_file_path(TEST_PHOTO)
         self.photo.save()
 

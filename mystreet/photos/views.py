@@ -12,7 +12,9 @@ def upload(request):
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
-            photo = form.save()
+            photo = form.save(commit=False)
+            photo.owner = request.user
+            photo.save()
             return HttpResponseRedirect(photo.get_absolute_url())
     else:
         form = UploadForm()
