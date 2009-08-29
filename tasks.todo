@@ -3,5 +3,9 @@
     - Add photo status view
     - Add ownership fields
     - Add camera info fields
+- Add blocks and streets
+    - Add block model and street model with admin
+    - Add home page with block/street list
+    - Add street and block fields to photo
 - Add photo masking support
 - Implement mosaics
