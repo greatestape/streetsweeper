@@ -3,6 +3,7 @@
     ✓ Add photo status view
     ✓ Add ownership fields
     - Add camera info fields
+- Create flat home page HTML
 - Add blocks and streets
     - Add block model and street model with admin
     - Add home page with block/street list
