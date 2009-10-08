@@ -36,7 +36,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
 )
 
-ROOT_URLCONF = 'mystreet.urls'
+ROOT_URLCONF = 'streetsweeper.urls'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
