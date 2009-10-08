@@ -4,10 +4,35 @@ body {
     background: white;
 }
 
+@font-face {
+  font-family: TorontoSubway;
+  src: url(‘../fonts/TorontoSubway.ttf’);
+}
+
+#LogoBackdrop {
+    opacity: 0.6;
+    width: 100%;
+    height: 130px;
+    margin: 150px auto 0px auto;
+    position: absolute;
+    z-index: 9;
+    background: white;
+}
+
 #Logo {
+    text-align: center;
+    width: 100%;
     margin: 150px auto 0px auto;
     position: absolute;
     z-index: 10;
+    font-family: TorontoSubway, Helvetica, Arial, sans-serif;
+    color: #E059EB;
+}
+
+#Logo h1 {
+    font-size: 60px;
+    margin: 0px;
+    padding: 0px;
 }
 
 #PhotoStrip {
