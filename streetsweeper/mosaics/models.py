@@ -16,7 +16,7 @@ class Mosaic(models.Model):
         verbose_name_plural = _(u'mosaics')
 
     def __unicode__(self):
-        return _(u'%(name)') % {'name': self.name}
+        return _(u'%(name)s') % {'name': self.name}
 
 
 class Patch(models.Model):
