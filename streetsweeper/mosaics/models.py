@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
 
 class Mosaic(models.Model):
     """A mosaic of images"""
-    name = models.CharField(blank=True, max_length=255)
+    name = models.CharField(_('name'), blank=True, max_length=255)
     slug = models.SlugField(_('slug'), prepopulate_from=("name",))
 
     class Admin:
