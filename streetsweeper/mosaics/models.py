@@ -26,7 +26,7 @@ class Patch(models.Model):
     position_x = models.FloatField(_lazy('position (x)'))
     position_y = models.FloatField(_lazy('position (y)'))
 
-    source_image = models.ForeignKey('Photo', verbose_name=_lazy(u'source image'))
+    source_image = models.ForeignKey('photos.Photo', verbose_name=_lazy(u'source image'))
     rotation = models.FloatField(_lazy('rotation'), help_text=_lazy('measured in radians, positive values rotate counte-clockwise'))
     mask = models.CommaSeparatedIntegerField(_('mask'), blank=True, max_length=512)
     modified_image = models.ImageField(_('modified image'), upload_to='managed/patch_caches', null=True, blank=True,)
