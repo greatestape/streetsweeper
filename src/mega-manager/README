@@ -1,0 +1,16 @@
+Mega-Manager
+============
+
+This utility Django app provides a function, `make_manager` that can be used
+to combine several managers together into a hybrid manager class. This hybrid
+manager will have all the methods defined in each manager that helps compose
+it.
+
+Additionally, manager classes provided to `make_manager` can define a
+`query_set_class` attribute, which should contain a class that is a sub-class
+of QuerySet. The query set class used by the hybrid manager will itself be a
+hybrid of all the custom query set classes defined in the original managers.
+This means that if multiple managers provide custom query set classes that
+have custom methods,
+
+For a usage example, see the code in `tests`.

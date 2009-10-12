@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
 
     'home',
+    'mosaics',
     'photos',
     'south',
 )
