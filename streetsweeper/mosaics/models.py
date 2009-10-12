@@ -1,11 +1,17 @@
 from django.db import models
 from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
 
+from mega_manager import make_manager
+
+from mosaics.managers import MosaicManager, TileManager
+
 
 class Mosaic(models.Model):
     """A mosaic of images"""
     name = models.CharField(_('name'), blank=True, max_length=255)
     slug = models.SlugField(_('slug'), unique=True)
+
+    objects = MosaicManager()
 
     class Admin:
         list_display = ('name',)
@@ -17,6 +23,25 @@ class Mosaic(models.Model):
 
     def __unicode__(self):
         return _(u'%(name)s') % {'name': self.name}
+
+
+class Slice(models.Model):
+    """A pre-rendered tile of a mosaic"""
+    mosaic = models.ForeignKey(Mosaic, verbose_name=_("mosaic"))
+    width = models.IntegerField(_('the width of the tile'))
+    height = models.IntegerField(_('the height of the tile'))
+    x_offset = models.IntegerField(_('the offset on x from the mosaic origin (in pixel-space)'))
+    y_offset = models.IntegerField(_('the offset on y from the mosaic origin (in pixel-space)'))
+    image = models.ImageField(upload_to="managed/tiles", height_field=height, width_field=width)
+
+    objects = make_manager(TileManager)
+
+    class Meta:
+        verbose_name = _("Tile")
+        verbose_name_plural = _("Tiles")
+
+    def __unicode__(self):
+        return u"Tile %d in mosaic %s" % (self.pk, self.mosaic)
 
 
 class Patch(models.Model):
