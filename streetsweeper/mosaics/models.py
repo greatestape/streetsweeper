@@ -29,7 +29,7 @@ class Patch(models.Model):
     source_image = models.ForeignKey('Photo', verbose_name=_lazy(u'source image'))
     rotation = models.FloatField(_lazy('rotation'), help_text=_lazy('measured in radians, positive values rotate counte-clockwise'))
     mask = models.CommaSeparatedIntegerField(_('mask'), blank=True, max_length=512)
-    modified_image = models.ImageField(_('modified image'), upload_to=get_modified_file_path, null=True, blank=True, height_field=, width_field=)
+    modified_image = models.ImageField(_('modified image'), upload_to='managed/patch_caches', null=True, blank=True,)
 
     class Admin:
         list_display = ('',)
