@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
+from django.utils.translation import ugettext_lazy as _
 
 from mega_manager import make_manager
 
@@ -46,13 +46,13 @@ class Slice(models.Model):
 
 class Patch(models.Model):
     """A Patch is a single image element with placement and cropping information for rendering it within a mosaic"""
-    mosaic = models.ForeignKey(Mosaic, verbose_name=_lazy(u'mosaic'))
-    scale = models.FloatField(_lazy('scale'), help_text=_lazy('The number of pixels in one AU (arbitrary unit) in the mosaic'))
-    position_x = models.FloatField(_lazy('position (x)'))
-    position_y = models.FloatField(_lazy('position (y)'))
+    mosaic = models.ForeignKey(Mosaic, verbose_name=_(u'mosaic'))
+    scale = models.FloatField(_('scale'), help_text=_('The number of pixels in one AU (arbitrary unit) in the mosaic'))
+    position_x = models.FloatField(_('position (x)'))
+    position_y = models.FloatField(_('position (y)'))
 
-    source_image = models.ForeignKey('photos.Photo', verbose_name=_lazy(u'source image'))
-    rotation = models.FloatField(_lazy('rotation'), help_text=_lazy('measured in radians, positive values rotate counte-clockwise'))
+    source_image = models.ForeignKey('photos.Photo', verbose_name=_(u'source image'))
+    rotation = models.FloatField(_('rotation'), help_text=_('measured in radians, positive values rotate counte-clockwise'))
     mask = models.CommaSeparatedIntegerField(_('mask'), blank=True, max_length=512)
     modified_image = models.ImageField(_('modified image'), upload_to='managed/patch_caches', null=True, blank=True,)
 
