@@ -46,6 +46,7 @@ def get_modified_file_path(instance, filename):
         getattr(instance,'pk','unknown'),
         filename)
 
+
 class Patch(models.Model):
     """A Patch is a single image element with placement and cropping information for rendering it within a mosaic"""
     mosaic = models.ForeignKey(Mosaic, verbose_name=_(u'mosaic'))
