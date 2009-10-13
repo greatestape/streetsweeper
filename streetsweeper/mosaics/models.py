@@ -40,6 +40,12 @@ class Slice(models.Model):
         return u"Tile %d in mosaic %s" % (self.pk, self.mosaic)
 
 
+def get_modified_file_path(instance, filename):
+    return 'managed/mosaics/%s/patches/%s/%s' % (
+        getattr(getattr(instance,'mosaic',None),'slug','unknown'),
+        getattr(instance,'pk','unknown'),
+        filename)
+
 class Patch(models.Model):
     """A Patch is a single image element with placement and cropping information for rendering it within a mosaic"""
     mosaic = models.ForeignKey(Mosaic, verbose_name=_(u'mosaic'))
@@ -50,7 +56,7 @@ class Patch(models.Model):
     source_image = models.ForeignKey('photos.Photo', verbose_name=_(u'source image'))
     rotation = models.FloatField(_('rotation'), help_text=_('measured in radians, positive values rotate counte-clockwise'))
     mask = models.CommaSeparatedIntegerField(_('mask'), blank=True, max_length=512)
-    modified_image = models.ImageField(_('modified image'), upload_to='managed/patch_caches', null=True, blank=True,)
+    modified_image = models.ImageField(_('modified image'), upload_to=get_modified_file_path, null=True, blank=True,)
 
     class Meta:
         verbose_name = _('Patch')
@@ -59,8 +65,3 @@ class Patch(models.Model):
     def __unicode__(self):
         return "Patch at (%s, %s) in mosaic %s" % (
                 self.position_x, self.position_y, self.mosaic)
-def get_modified_file_path(instance, filename):
-    return 'managed/mosaics/%s/patches/%s/%s' % (
-        getattr(getattr(instance,'mosaic',None),'slug','unknown'),
-        getattr(instance,'pk','unknown'),
-        filename)
