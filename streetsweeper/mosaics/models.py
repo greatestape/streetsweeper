@@ -13,10 +13,6 @@ class Mosaic(models.Model):
 
     objects = MosaicManager()
 
-    class Admin:
-        list_display = ('name',)
-        search_fields = ('name',)
-
     class Meta:
         verbose_name = _(u'mosaic')
         verbose_name_plural = _(u'mosaics')
@@ -55,10 +51,6 @@ class Patch(models.Model):
     rotation = models.FloatField(_('rotation'), help_text=_('measured in radians, positive values rotate counte-clockwise'))
     mask = models.CommaSeparatedIntegerField(_('mask'), blank=True, max_length=512)
     modified_image = models.ImageField(_('modified image'), upload_to='managed/patch_caches', null=True, blank=True,)
-
-    class Admin:
-        list_display = ('',)
-        search_fields = ('',)
 
     def __str__(self):
         return "Patch"
