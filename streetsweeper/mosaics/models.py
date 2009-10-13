@@ -59,9 +59,8 @@ class Patch(models.Model):
     def __unicode__(self):
         return "Patch at (%s, %s) in mosaic %s" % (
                 self.position_x, self.position_y, self.mosaic)
-
 def get_modified_file_path(instance, filename):
-    return 'files/mosaics/%s/patches/%s/%s' % (
+    return 'managed/mosaics/%s/patches/%s/%s' % (
         getattr(getattr(instance,'mosaic',None),'slug','unknown'),
         getattr(instance,'pk','unknown'),
         filename)
