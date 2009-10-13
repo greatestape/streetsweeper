@@ -52,9 +52,9 @@ class Patch(models.Model):
     mask = models.CommaSeparatedIntegerField(_('mask'), blank=True, max_length=512)
     modified_image = models.ImageField(_('modified image'), upload_to='managed/patch_caches', null=True, blank=True,)
 
-    def __str__(self):
-        return "Patch"
-
+    def __unicode__(self):
+        return "Patch at (%s, %s) in mosaic %s" % (
+                self.position_x, self.position_y, self.mosaic)
 
 def get_modified_file_path(instance, filename):
     return 'files/mosaics/%s/patches/%s/%s' % (
