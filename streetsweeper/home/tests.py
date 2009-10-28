@@ -1,9 +1,13 @@
+from django.conf import settings
 from django.test import TestCase
 
 from mosaics.models import Mosaic
 
 
 class HomePageTestCase(TestCase):
+    def setUp(self):
+        Mosaic.objects.create(name='Test', slug=settings.DEFAULT_MOSAIC)
+
     def testHomePageLoads(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
