@@ -5,6 +5,7 @@
     - Add camera info fields
 ✓ Create flat home page HTML
 - Make home page pull from faked-mosaic object
+    - Create template tag to populate non-js version: tag should take width, height, and sidewalk/storefront edge level (at centre)
 - Add blocks and streets
     - Add block model and street model with admin
     - Add home page with block/street list
