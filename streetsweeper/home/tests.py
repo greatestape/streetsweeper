@@ -24,4 +24,7 @@ class MosaicTestCase(TestCase):
                 y_offset=0
                 )
         response = self.client.get('/')
-        self.assertTrue(mosaic.slice_set.all()[0] in response.context['slices'])
+        try:
+            response.context['mosaic']
+        except IndexError:
+            self.fail('"mosaic" not found in context: %s' % response.context)
