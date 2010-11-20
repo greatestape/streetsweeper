@@ -10,7 +10,7 @@
 
 ✓ update to django 1.2
 ✓ update to latest south
-- create wireframes
+✓ create wireframes
 ✓ simplify models
 
   ✓ remove AddressedLocation and Block from streets app
