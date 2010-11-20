@@ -4,7 +4,7 @@ from django.db import models
 from mosaics.models import *
 
 class Migration:
-    
+    depends_on = [('photos', '0001_initial')]
     def forwards(self, orm):
         
         # Adding model 'Mosaic'

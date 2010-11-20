@@ -1,0 +1,5 @@
+repo: d1a2ce3372ce2aee4cf0ab85790033b2f1a621a9
+node: 7e4cbf82243f359651c5c14dca85cb331a282e3f
+branch: default
+tag: 0.7.2
+tag: stableish
