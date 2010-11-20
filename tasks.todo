@@ -8,7 +8,7 @@
 0.1
 ---
 
-- update to django 1.2
+✓ update to django 1.2
 - update to latest south
 - create wireframes
 - simplify models
