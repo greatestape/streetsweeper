@@ -4,15 +4,17 @@
     ✓ Add ownership fields
     - Add camera info fields
 ✓ Create flat home page HTML
-- Make home page pull from faked-mosaic object
-    - Create template tag to populate non-js version: tag should take width, height, and sidewalk/storefront edge level (at centre)
-- Add blocks and streets
-    - Add block model and street model with admin
-    - Add home page with block/street list
-    - Add street and block fields to photo
-- Add photo masking support
-- Implement mosaics
 
-Front end
----------
-- Do front end
+0.1
+---
+
+- update to django 1.2
+- update to latest south
+- create wireframes
+- simplify models
+
+  - remove AddressedLocation and Block from streets app
+  - add fk from Photo to Street
+  - add side-of-street indicator to Photo
+  - remove mosaics app
+
