@@ -1,12 +1,31 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.test import TestCase
 
-from mosaics.models import Mosaic
+from photos.models import Photo
+from streets.models import Street
 
 
 class HomePageTestCase(TestCase):
     def setUp(self):
-        Mosaic.objects.create(name='Test', slug=settings.DEFAULT_MOSAIC)
+        photo = self.create_photo()
+
+    def create_street(self):
+        return Street.objects.create(name="Test Streets")
+
+    def create_user(self):
+        return User.objects.create(username='test-user')
+
+    def create_photo(self, street=None, owner=None):
+        if street is None:
+            street = self.create_street()
+        if owner is None:
+            owner = self.create_user()
+        return Photo.objects.create(
+                street=street,
+                owner=owner,
+                side_of_street='side-a',
+                )
 
     def testHomePageLoads(self):
         response = self.client.get('/')
@@ -16,19 +35,6 @@ class HomePageTestCase(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home/home.html')
 
-
-class MosaicTestCase(TestCase):
-    """Tests that the home page uses mosaics properly"""
-    def testHomePageContainsMosaicCompositeImage(self):
-        mosaic = Mosaic.objects.create(name='Test', slug='north')
-        mosaic.slice_set.create(
-                width=100,
-                height=100,
-                x_offset=0,
-                y_offset=0
-                )
-        response = self.client.get('/')
-        try:
-            response.context['mosaic']
-        except IndexError:
-            self.fail('"mosaic" not found in context: %s' % response.context)
+    def testPhotosAppearOnHomePage(self):
+        # TODO
+        pass

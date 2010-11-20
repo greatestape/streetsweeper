@@ -1,0 +1,20 @@
+- Add photo upload support
+    ✓ Add photo upload view (GET and POST)
+    ✓ Add photo status view
+    ✓ Add ownership fields
+    - Add camera info fields
+✓ Create flat home page HTML
+
+0.1
+---
+
+✓ update to django 1.2
+✓ update to latest south
+- create wireframes
+✓ simplify models
+
+  ✓ remove AddressedLocation and Block from streets app
+  ✓ add fk from Photo to Street
+  ✓ add side-of-street indicator to Photo
+  ✓ remove mosaics app
+

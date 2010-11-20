@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from photos.models import Photo
+from streets.models import Street
 
 TEST_PHOTO = 'static/test_files/photo1.jpg'
 
@@ -56,9 +57,13 @@ class PhotoUploadTestCase(TestCase):
 class PhotoStatusTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('testuser', 'testuser@test.com', 'testpw')
-        self.photo = Photo.objects.create(owner=self.user)
+        self.street = self.create_street()
+        self.photo = Photo.objects.create(owner=self.user, street=self.street)
         self.photo.photo = _get_media_file_path(TEST_PHOTO)
         self.photo.save()
+
+    def create_street(self):
+        return Street.objects.create(name="Test Streets")
 
     def testStatusPage(self):
         response = self.client.get(self.photo.get_absolute_url())

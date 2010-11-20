@@ -45,10 +45,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
 
-    'home',
-    'mosaics',
-    'photos',
     'south',
+
+    'home',
+    'photos',
+    'streets',
 )
 
 try:

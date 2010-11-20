@@ -5,6 +5,7 @@ from django.views.generic import simple, list_detail
 
 from photos.forms import UploadForm
 from photos.models import Photo
+from streets import settings as street_settings
 
 
 @login_required
@@ -14,6 +15,7 @@ def upload(request):
         if form.is_valid():
             photo = form.save(commit=False)
             photo.owner = request.user
+            photo.street_id = street_settings.STREET_ID
             photo.save()
             return HttpResponseRedirect(photo.get_absolute_url())
     else:

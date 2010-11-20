@@ -1,13 +1,13 @@
 from django.conf import settings
 from django.views.generic import simple
 
-from mosaics.models import Mosaic
+from photos.models import Photo
 
 
 def home(request):
-    mosaic = Mosaic.objects.get_by_slug(settings.DEFAULT_MOSAIC)
+    photos = Photo.objects.all()
     return simple.direct_to_template(
             request,
             'home/home.html',
-            {'mosaic': mosaic},
+            {'photo_list': photos},
             )
