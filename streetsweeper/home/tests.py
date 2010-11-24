@@ -16,7 +16,7 @@ class HomePageTestCase(TestCase):
     def create_user(self):
         return User.objects.create(username='test-user')
 
-    def create_photo(self, street=None, owner=None):
+    def create_photo(self, street=None, owner=None, x_offset=0):
         if street is None:
             street = self.create_street()
         if owner is None:
@@ -28,6 +28,7 @@ class HomePageTestCase(TestCase):
                 street=street,
                 owner=owner,
                 side_of_street='side-a',
+                x_offset=0,
                 )
 
     def testHomePageLoads(self):
@@ -41,3 +42,7 @@ class HomePageTestCase(TestCase):
     def testPhotosAppearOnHomePage(self):
         response = self.client.get('/')
         self.assertContains(response, self.photo.photo.url)
+
+    def testPhotosOutOfRangeNotDisplayed(self):
+        # TODO
+        pass

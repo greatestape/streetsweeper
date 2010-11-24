@@ -13,6 +13,8 @@ class Photo(models.Model):
     street = models.ForeignKey('streets.Street', verbose_name=_('street'))
     side_of_street = models.CharField(_('side of street'), max_length=255,
             choices=STREET_SIDE_CHOICES)
+    x_offset = models.FloatField(_('x offset (m)'),
+            help_text=_('offset from street origin in meters'))
 
     class Meta:
         verbose_name = _("Photo")
