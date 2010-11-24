@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+  Pictures of street go here
+  {% for photo in photo_list %}
+      <img src="{{ photo.photo.url }}">
+  {% endfor %}
+{% endblock %}
