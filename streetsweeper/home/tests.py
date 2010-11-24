@@ -8,7 +8,7 @@ from streets.models import Street
 
 class HomePageTestCase(TestCase):
     def setUp(self):
-        photo = self.create_photo()
+        self.photo = self.create_photo()
 
     def create_street(self):
         return Street.objects.create(name="Test Streets")
@@ -22,6 +22,9 @@ class HomePageTestCase(TestCase):
         if owner is None:
             owner = self.create_user()
         return Photo.objects.create(
+                photo='no-photo.fakepg',
+                width=200,
+                height=200,
                 street=street,
                 owner=owner,
                 side_of_street='side-a',
@@ -36,5 +39,5 @@ class HomePageTestCase(TestCase):
         self.assertTemplateUsed(response, 'home/home.html')
 
     def testPhotosAppearOnHomePage(self):
-        # TODO
-        pass
+        response = self.client.get('/')
+        self.assertContains(response, self.photo.photo.url)
