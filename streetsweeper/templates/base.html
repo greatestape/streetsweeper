@@ -1,23 +1,50 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!doctype html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ lang }}" lang="{{ lang }}">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="{{ lang }}" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block title %}StreetSweeper{% endblock title %}</title>
+    <meta name="description" content=""> <!--TODO--> 
+    <meta name="author" content=""> <!--TODO--> 
 
-        <title>{% block title %}Queen On Its Face{% endblock %}</title>
+    <!-- TODO -->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--<link rel="shortcut icon" href="/favicon.ico">-->
+    <!--<link rel="apple-touch-icon" href="/apple-touch-icon.png">-->
+
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/screen.css">
+    <script src="{{ MEDIA_URL }}js/modernizr-1.6.min.js"></script>
+</head>
+
+<body>
+{% block body %}
         
-        <style type="text/css" media="all">
-            @import "{{ MEDIA_URL }}static/css/screen.css";
-        </style>
-        {% block css %}{% endblock %}
-        {% block syndication %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}
-            <div id="MainContent">
-                {% block content %}{% endblock %}
-            </div>
-        {% endblock %}
-    </body>
+    <div id="container">
+        <header>
+        </header>
+
+        <div id="main">
+        </div>
+
+        <footer>
+        </footer>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="{{ MEDIA_URL }}js/jquery-1.4.4.js"%3E%3C/script%3E'))</script>
+
+    <!--<script src="{{ MEDIA_URL }}js/streetsweeper.js"></script> [>TODO<] -->
+
+    <!--[if lt IE 7 ]>
+    <script> // fix any <img> or .png_bg background-images
+        $.getScript("{{ MEDIA_URL }}js/dd_belatedpng.js",function(){ DD_belatedPNG.fix('img, .png_bg'); });
+    </script>
+    <![endif]-->
+
+{% endblock body %}
+</body>
 </html>
