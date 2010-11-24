@@ -1,5 +1,6 @@
-<!doctype html>
+{% load i18n %}
 
+<!doctype html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
@@ -25,9 +26,13 @@
         
     <div id="container">
         <header>
+            <h1>StreetSweeper</h1>
+            <p id="Tagline">{% trans "Your street. Your stories." %}</p>
+            <hr />
         </header>
 
         <div id="main">
+            {% block content %}{% endblock content %}
         </div>
 
         <footer>
