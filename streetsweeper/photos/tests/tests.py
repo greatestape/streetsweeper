@@ -11,7 +11,10 @@ from django.test import TestCase
 from photos.models import Photo
 from streets.models import Street
 
-TEST_PHOTO = 'static/test_files/photo1.jpg'
+TEST_PHOTO = os.path.join(
+        os.path.realpath(os.path.dirname(__file__)),
+        'photo1.jpg')
+
 
 class PhotoUploadTestCase(TestCase):
     """Testing that photos can be uploaded"""
@@ -20,14 +23,14 @@ class PhotoUploadTestCase(TestCase):
         self.user = User.objects.create_user('testuser', 'testuser@test.com', 'testpw')
 
     def testPhotoUploadPost(self):
-        test_file = _get_media_file_path(TEST_PHOTO)
         self.client.login(username='testuser', password='testpw')
-        response = self.client.post(self.upload_url, {'photo': open(test_file)})
+        response = self.client.post(self.upload_url, {
+                'photo': open(TEST_PHOTO), 'x_offset': '0'})
         self.assertEqual(Photo.objects.count(), 1)
         new_photo = Photo.objects.all()[0]
         self.assertRedirects(response, new_photo.get_absolute_url())
-        actual_file = open(test_file)
-        actual_image = Image.open(test_file)
+        actual_file = open(TEST_PHOTO)
+        actual_image = Image.open(TEST_PHOTO)
         actual_width, actual_height = actual_image.size
         self.assertEqual(actual_file.read(), new_photo.photo.read())
         self.assertEqual(new_photo.width, actual_width)
@@ -57,10 +60,11 @@ class PhotoUploadTestCase(TestCase):
 class PhotoStatusTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('testuser', 'testuser@test.com', 'testpw')
+        self.client.login(username='testuser', password='testpw')
         self.street = self.create_street()
-        self.photo = Photo.objects.create(owner=self.user, street=self.street)
-        self.photo.photo = _get_media_file_path(TEST_PHOTO)
-        self.photo.save()
+        self.client.post(reverse('photo_upload'), {
+                'photo': open(TEST_PHOTO), 'x_offset': '0'})
+        self.photo = Photo.objects.latest('id')
 
     def create_street(self):
         return Street.objects.create(name="Test Streets")
@@ -69,7 +73,3 @@ class PhotoStatusTestCase(TestCase):
         response = self.client.get(self.photo.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'photos/photo_detail.html')
-
-
-def _get_media_file_path(path):
-    return os.path.join(settings.MEDIA_ROOT, path)

@@ -9,4 +9,4 @@ class UploadForm(forms.ModelForm):
 
     class Meta:
         model = Photo
-        fields = ('photo',)
+        fields = ('photo', 'x_offset',)
