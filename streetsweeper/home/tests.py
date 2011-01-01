@@ -28,7 +28,7 @@ class HomePageTestCase(TestCase):
                 street=street,
                 owner=owner,
                 side_of_street='side-a',
-                x_offset=0,
+                x_offset=x_offset,
                 )
 
     def testHomePageLoads(self):
