@@ -1,13 +1,30 @@
 from django.conf import settings
+from django.template import RequestContext
+from django.template.loader import render_to_string
 from django.views.generic import simple
 
 from photos.models import Photo
 
+from home.forms import ViewportForm
+
 
 def home(request):
-    photos = Photo.objects.all()
+    form = ViewportForm(request.GET)
+    if not form.is_valid():
+        return HttpBadRequest(render_to_string(
+                '400.html',
+                {'errors': form.errors},
+                RequestContext(request)))
+    width = form.cleaned_data['width']
+    position = form.cleaned_data['position']
+    photos = Photo.objects.filter(
+            x_offset__gte=position - width / 2,
+            x_offset__lte=position + width / 2,
+            )
     return simple.direct_to_template(
             request,
             'home/home.html',
-            {'photo_list': photos},
-            )
+            {'photo_list': photos,
+            'position': position,
+            'width': width,
+            },)
