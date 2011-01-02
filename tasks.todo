@@ -18,4 +18,6 @@
   ✓ add side-of-street indicator to Photo
   ✓ remove mosaics app
 
-- update homepage to display photos within a given x range
+✓ update homepage to display photos within a given x range
+- add nav buttons to home page to scroll left and right
+- add image upload form
