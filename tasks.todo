@@ -19,5 +19,16 @@
   ✓ remove mosaics app
 
 ✓ update homepage to display photos within a given x range
+- add support for cross-streets
+- make photo upload use cross-street-based positioning
+- set up registration
+- add scale parameter to home page view, change width param to be in pixels
 - add nav buttons to home page to scroll left and right
-- add image upload form
+
+0.2
+---
+
+- add support for rotating, scaling and vertically positioning photos
+  - provide non-JS interface for scaling and cropping
+  - create template tag/filter for generating flattened collage pieces for a given range of street at a given resolution
+  - add support for serving scaled/rotated images individually for use with AJAX
