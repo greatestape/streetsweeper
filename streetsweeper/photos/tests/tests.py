@@ -23,6 +23,11 @@ class PhotoTestCase(TestCase):
         self.street = self.create_street()
         self.user = User.objects.create_user('testuser', 'testuser@test.com', 'testpw')
         self.client.login(username='testuser', password='testpw')
+        self.photos_to_delete = []
+
+    def tearDown(self):
+        for photo in self.photos_to_delete:
+            photo.delete()
 
     def create_street(self):
         return Street.objects.create(name="Test Street")
@@ -39,6 +44,7 @@ class PhotoTestCase(TestCase):
                 "Photo wasn't created." +
                 (" Form errors: %s" % form_errors.as_text() if form_errors else ''))
         photo = Photo.objects.latest('id')
+        self.photos_to_delete.append(photo)
         return photo
 
 
