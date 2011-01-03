@@ -16,14 +16,35 @@ TEST_PHOTO = os.path.join(
         'photo1.jpg')
 
 
-class PhotoUploadTestCase(TestCase):
-    """Testing that photos can be uploaded"""
+class PhotoTestCase(TestCase):
     def setUp(self):
+        super(PhotoTestCase, self).setUp()
         self.upload_url = reverse('photo_upload')
+        self.street = self.create_street()
         self.user = User.objects.create_user('testuser', 'testuser@test.com', 'testpw')
-
-    def testPhotoUploadPost(self):
         self.client.login(username='testuser', password='testpw')
+
+    def create_street(self):
+        return Street.objects.create(name="Test Street")
+
+    def create_photo(self):
+        old_photo_count = Photo.objects.count()
+        response = self.client.post(reverse('photo_upload'), {
+                'photo': open(TEST_PHOTO), 'x_offset': '0'})
+        if response.context and 'form' in response.context:
+            form_errors = response.context['form'].errors
+        else:
+            form_errors = None
+        self.assertEqual(Photo.objects.count(), old_photo_count + 1,
+                "Photo wasn't created." +
+                (" Form errors: %s" % form_errors.as_text() if form_errors else ''))
+        photo = Photo.objects.latest('id')
+        return photo
+
+
+class PhotoUploadTests(PhotoTestCase):
+    """Testing that photos can be uploaded"""
+    def testPhotoUploadPost(self):
         response = self.client.post(self.upload_url, {
                 'photo': open(TEST_PHOTO), 'x_offset': '0'})
         self.assertEqual(Photo.objects.count(), 1)
@@ -38,17 +59,16 @@ class PhotoUploadTestCase(TestCase):
         self.assertEqual(new_photo.owner, self.user)
 
     def testPhotoUploadGet(self):
-        self.client.login(username='testuser', password='testpw')
         response = self.client.get(self.upload_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'photos/upload.html')
 
     def testNoFileError(self):
-        self.client.login(username='testuser', password='testpw')
         response = self.client.post(self.upload_url)
         self.assertFormError(response, 'form', 'photo', 'Please provide a photo for upload.')
 
     def testUnauthenticatedGetRedirects(self):
+        self.client.logout()
         response = self.client.get(self.upload_url)
         self.assertRedirects(response, '%s?next=%s' % (settings.LOGIN_URL, self.upload_url))
 
@@ -57,19 +77,9 @@ class PhotoUploadTestCase(TestCase):
             photo.delete()
 
 
-class PhotoStatusTestCase(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user('testuser', 'testuser@test.com', 'testpw')
-        self.client.login(username='testuser', password='testpw')
-        self.street = self.create_street()
-        self.client.post(reverse('photo_upload'), {
-                'photo': open(TEST_PHOTO), 'x_offset': '0'})
-        self.photo = Photo.objects.latest('id')
-
-    def create_street(self):
-        return Street.objects.create(name="Test Streets")
-
+class PhotoStatusTests(PhotoTestCase):
     def testStatusPage(self):
-        response = self.client.get(self.photo.get_absolute_url())
+        photo = self.create_photo()
+        response = self.client.get(photo.get_absolute_url())
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'photos/photo_detail.html')
