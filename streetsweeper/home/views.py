@@ -15,6 +15,8 @@ def home(request):
                 '400.html',
                 {'errors': form.errors},
                 RequestContext(request)))
+    # TODO: Treat width as a value in pixels, add "scale" field
+    # for determining the extent of the street that should be displayed
     width = form.cleaned_data['width']
     position = form.cleaned_data['position']
     photos = Photo.objects.filter(
