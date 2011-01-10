@@ -7,6 +7,9 @@ class Street(models.Model):
     name = models.CharField(_('name'), max_length=255)
     x_offset = models.IntegerField(_('x offset'),
             help_text=_("Offset in meters from home street's origin."))
+    # TODO: Add fields for setting separate names for the part of the street
+    # "below" the origin and the part "above" the origin (ex. Queen St. W,
+    # Queen St. E)
 
     class Meta:
         verbose_name = _(u'street')
