@@ -15,4 +15,4 @@ class Street(models.Model):
         verbose_name_plural = _(u'streets')
 
     def __unicode__(self):
-        return _(u'%(name)s') % {'name': self.name}
+        return self.name
