@@ -4,14 +4,12 @@ from django.test import TestCase
 
 from photos.models import Photo
 from streets.models import Street
+from streets.tests import StreetHelper
 
 
-class HomePageTestCase(TestCase):
+class HomePageTestCase(TestCase, StreetHelper):
     def setUp(self):
         self.photo = self.create_photo()
-
-    def create_street(self):
-        return Street.objects.create(name="Test Streets")
 
     def create_user(self):
         return User.objects.create(username='test-user')

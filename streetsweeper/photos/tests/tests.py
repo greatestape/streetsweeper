@@ -10,13 +10,14 @@ from django.test import TestCase
 
 from photos.models import Photo
 from streets.models import Street
+from streets.tests import StreetHelper
 
 TEST_PHOTO = os.path.join(
         os.path.realpath(os.path.dirname(__file__)),
         'photo1.jpg')
 
 
-class PhotoTestCase(TestCase):
+class PhotoTestCase(TestCase, StreetHelper):
     def setUp(self):
         super(PhotoTestCase, self).setUp()
         self.upload_url = reverse('photo_upload')
@@ -28,9 +29,6 @@ class PhotoTestCase(TestCase):
     def tearDown(self):
         for photo in self.photos_to_delete:
             photo.delete()
-
-    def create_street(self):
-        return Street.objects.create(name="Test Street")
 
     def create_photo(self):
         old_photo_count = Photo.objects.count()
