@@ -10,7 +10,6 @@ class Photo(models.Model):
     photo = models.ImageField(upload_to="managed/photos", height_field='height', width_field='width')
     width = models.IntegerField(_('width'), null=True, blank=True)
     height = models.IntegerField(_('height'), null=True, blank=True)
-    street = models.ForeignKey('streets.Street', verbose_name=_('street'))
     side_of_street = models.CharField(_('side of street'), max_length=255,
             choices=STREET_SIDE_CHOICES)
     x_offset = models.FloatField(_('x offset (m)'),

@@ -16,16 +16,13 @@ class HomePageTestCase(TestCase):
     def create_user(self):
         return User.objects.create(username='test-user')
 
-    def create_photo(self, street=None, owner=None, x_offset=0, filename='no-photo.fake'):
-        if street is None:
-            street = self.create_street()
+    def create_photo(self, owner=None, x_offset=0, filename='no-photo.fake'):
         if owner is None:
             owner = self.create_user()
         return Photo.objects.create(
                 photo=filename,
                 width=200,
                 height=200,
-                street=street,
                 owner=owner,
                 side_of_street='side-a',
                 x_offset=x_offset,
