@@ -1,10 +1,10 @@
 from django.db import models
-from django.utils.translation import ugettext as _, ugettext_lazy as _lazy
+from django.utils.translation import ugettext_lazy as _
 
 
 class Street(models.Model):
     """A street that will be depicted using mosaics"""
-    name = models.CharField(_lazy('name'), max_length=255)
+    name = models.CharField(_('name'), max_length=255)
 
     class Meta:
         verbose_name = _(u'street')
