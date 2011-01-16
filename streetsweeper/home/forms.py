@@ -13,5 +13,5 @@ class ViewportForm(forms.Form):
         return width or DEFAULT_WIDTH
 
     def clean_position(self):
-        width = self.cleaned_data.get('position')
-        return width or DEFAULT_POSITION
+        position = self.cleaned_data.get('position')
+        return position or DEFAULT_POSITION
