@@ -4,9 +4,9 @@ from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.views.generic import simple
 
-from photos.models import Photo
-
 from home.forms import ViewportForm
+from photos.models import Photo
+from streets.models import Street
 
 
 def home(request):
@@ -26,6 +26,10 @@ def home(request):
             x_offset__gte=left_edge,
             x_offset__lte=right_edge,
             )
+    streets = Street.objects.filter(
+            x_offset__gte=left_edge,
+            x_offset__lte=right_edge,
+            )
     return simple.direct_to_template(
             request,
             'home/home.html',
@@ -36,4 +40,5 @@ def home(request):
             'width_in_pixels': width_in_pixels,
             'width_in_metres': width_in_metres,
             'scale': scale,
+            'street_list': streets,
             },)

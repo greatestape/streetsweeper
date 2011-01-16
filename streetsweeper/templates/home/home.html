@@ -14,6 +14,14 @@
     {% endif %}
     <h2>Viewing slice from {{ left_edge|format_distance }} to {{ right_edge|format_distance }}.</h2>
 
+    {% if street_list %}
+    <h3>Streets in view:</h3>
+    <ul>
+        {% for street in street_list %}
+        <li>{{ street.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
   Pictures of street go here
   {% for photo in photo_list %}

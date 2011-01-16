@@ -72,3 +72,17 @@ class HomePageTestCase(TestCase, StreetHelper):
                 in_range_photo.photo.url,
                 response.content))
         self.assertNotContains(response, out_of_range_photo.photo.url)
+
+    def testOnlyStreetsInRangeAreDisplayed(self):
+        in_range_street = self.create_street(x_offset=-475, name='Near Street')
+        out_of_range_street = self.create_street(x_offset=-1050, name='Far Street')
+        response = self.client.get('/',
+                {'position': '-440', 'width': '1200', 'scale': '15'})
+        self.assertTrue(in_range_street in response.context['street_list'],
+                "In range street %s not found in %s" %
+                (in_range_street, response.context['street_list']))
+        self.assertTrue(out_of_range_street not in response.context['street_list'],
+                "Out of range street %s unexpectedly found in %s" %
+                (out_of_range_street, response.context['street_list']))
+        self.assertContains(response, in_range_street.name)
+        self.assertNotContains(response, out_of_range_street)
