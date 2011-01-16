@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import HttpResponseBadRequest
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.views.generic import simple
@@ -11,7 +12,7 @@ from home.forms import ViewportForm
 def home(request):
     form = ViewportForm(request.GET)
     if not form.is_valid():
-        return HttpBadRequest(render_to_string(
+        return HttpResponseBadRequest(render_to_string(
                 '400.html',
                 {'errors': form.errors},
                 RequestContext(request)))

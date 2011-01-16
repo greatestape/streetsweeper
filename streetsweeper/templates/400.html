@@ -1,0 +1,8 @@
+{% extends "error.html" %}
+
+{% block title %}{{ block.super }} - Bad Request{% endblock %}
+
+{% block content %}
+<h1>Bad Request</h1>
+{{ errors.as_ul }}
+{% endblock %}
