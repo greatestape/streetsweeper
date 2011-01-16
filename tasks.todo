@@ -19,7 +19,7 @@
   ✓ remove mosaics app
 
 ✓ update homepage to display photos within a given x range
-- add support for cross-streets
+✓ add support for cross-streets
 - make photo upload use cross-street-based positioning
 - set up registration
 - add scale parameter to home page view, change width param to be in pixels
