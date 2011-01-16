@@ -20,8 +20,8 @@ def home(request):
     width = form.cleaned_data['width']
     position = form.cleaned_data['position']
     photos = Photo.objects.filter(
-            x_offset__gte=position - width / 2,
-            x_offset__lte=position + width / 2,
+            x_offset__gte=position - width / 2.0,
+            x_offset__lte=position + width / 2.0,
             )
     return simple.direct_to_template(
             request,

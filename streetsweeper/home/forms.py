@@ -1,11 +1,11 @@
 from django import forms
 
 DEFAULT_WIDTH = 100
-DEFAULT_POSITION = 0
+DEFAULT_POSITION = 0.0
 
 
 class ViewportForm(forms.Form):
-    position = forms.IntegerField(required=False)
+    position = forms.FloatField(required=False)
     width = forms.IntegerField(required=False)
 
     def clean_width(self):
