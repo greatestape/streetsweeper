@@ -3,7 +3,7 @@ from django.utils.translation import ugettext as _
 
 DEFAULT_WIDTH = 1000
 DEFAULT_POSITION = 0.0
-DEFAULT_SCALE = 10.0
+DEFAULT_SCALE = 5.0
 
 
 class ViewportForm(forms.Form):
