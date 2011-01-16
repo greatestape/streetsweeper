@@ -43,16 +43,27 @@ class HomePageTestCase(TestCase, StreetHelper):
                 x_offset=195, filename='in-range-photo.fake')
         out_of_range_photo = self.create_photo(owner=self.photo.owner,
                 x_offset=-10, filename='out-of-range-photo.fake')
-        response = self.client.get('/', {'position': '200', 'width': '30'})
-        self.assertEqual(response.context['position'], 200,
+        response = self.client.get('/',
+                {'position': '200', 'width': '1200', 'scale': '15'})
+        self.assertEqual(response.context['centre_position'], 200,
                 "Position was %s instead of %s. Query string was: %s" % (
-                response.context['position'],
+                response.context['centre_position'],
                 200,
                 response.request['QUERY_STRING']))
-        self.assertEqual(response.context['width'], 30,
-                "Width was %s instead of %s. Query string was: %s" % (
-                response.context['width'],
-                30,
+        self.assertEqual(response.context['width_in_pixels'], 1200,
+                "Width in pixels was %s instead of %s. Query string was: %s" % (
+                response.context['width_in_pixels'],
+                1200,
+                response.request['QUERY_STRING']))
+        self.assertEqual(response.context['scale'], 15,
+                "Scale was %s instead of %s. Query string was: %s" % (
+                response.context['scale'],
+                15,
+                response.request['QUERY_STRING']))
+        self.assertEqual(response.context['width_in_metres'], 80,
+                "Width in metres was %s instead of %s. Query string was: %s" % (
+                response.context['width_in_metres'],
+                80,
                 response.request['QUERY_STRING']))
         self.assertTrue(in_range_photo in response.context['photo_list'],
                 "%s not found in %s" % (in_range_photo, response.context['photo_list']))

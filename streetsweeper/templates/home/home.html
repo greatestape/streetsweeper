@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
+{% load home_tags %}
+
 {% block content %}
+    {% if left_edge > 0 %}
+    <h1>Queen Street East</h1>
+    {% else %}
+        {% if right_edge < 0 %}
+    <h1>Queen Street West</h1>
+        {% else %}
+    <h1>Queen Street East/West</h1>
+        {% endif %}
+    {% endif %}
+    <h2>Viewing slice from {{ left_edge|format_distance }} to {{ right_edge|format_distance }}.</h2>
+
+
   Pictures of street go here
   {% for photo in photo_list %}
       <img src="{{ photo.photo.url }}">
